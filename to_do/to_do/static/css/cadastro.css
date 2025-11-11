@@ -1,0 +1,14 @@
+/* Estilo para os Ícones nos Campos (Inputs) */
+.input-group-text {
+    background-color: var(--amarelo-principal);
+    border-color: var(--amarelo-principal);
+    color: var(--texto-escuro);
+}
+
+/* Garante que o input não fique com a borda dupla */
+.input-group .form-control {
+    border-left: 0;
+}
+.input-group .form-control:focus {
+    box-shadow: none; /* Remove o brilho lilás quando o ícone está presente */
+}

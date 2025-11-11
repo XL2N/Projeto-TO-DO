@@ -1,0 +1,39 @@
+/* ======================================== */
+/* == ESTILOS PERSONALIZADOS PARA O LOGIN == */
+/* ======================================== */
+
+/* 1. Customização do Card de Login */
+.login-card {
+    border-radius: 20px; /* Bordas mais suaves */
+    border: 1px solid #eee;
+    /* Um gradiente sutil usando suas cores */
+    background: linear-gradient(145deg, #ffffff, var(--fundo-neutro));
+}
+
+.login-card h2 {
+    font-weight: 700; /* Deixa o título "Fazer Login" mais forte */
+    color: var(--texto-escuro);
+}
+
+/* 2. Estilo para os Ícones nos Campos (Inputs) */
+/* Usamos 'input-group' do Bootstrap para isso */
+.input-group-text {
+    background-color: var(--amarelo-principal);
+    border-color: var(--amarelo-principal);
+    color: var(--texto-escuro);
+}
+
+/* Garante que o input não fique com a borda dupla */
+.input-group .form-control {
+    border-left: 0;
+}
+.input-group .form-control:focus {
+    box-shadow: none; /* Remove o brilho lilás quando o ícone está presente */
+}
+
+
+/* 3. Efeito Hover Melhorado para o Botão */
+.btn-amarelo:hover {
+    transform: translateY(-3px); /* Efeito de "levantar" o botão */
+    box-shadow: 0 4px 12px rgba(164, 117, 164, 0.6); /* Sombra lilás mais forte */
+}

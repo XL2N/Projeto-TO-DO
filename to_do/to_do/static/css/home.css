@@ -1,0 +1,30 @@
+/* Adicione no final do seu style.css */
+
+.task-completed {
+    background-color: #f8f9fa; /* Fundo cinza claro */
+}
+
+.task-completed .task-title {
+    /* RISCA O TEXTO da tarefa concluída */
+    text-decoration: line-through; 
+    color: #6c757d; /* Deixa o texto cinza */
+}
+
+.task-completed span {
+    text-decoration: line-through; /* Tacha o texto */
+    color: #6c757d; /* Cor do texto mais suave */
+}
+
+h2 {
+    color: #A475A4;
+}
+
+h4{
+    color: #6c757d;
+}
+.list-group-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: all 0.2s ease-in-out;
+    z-index: 10;
+}

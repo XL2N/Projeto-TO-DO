@@ -1,0 +1,5 @@
+.welcome-card {
+    padding: 1.5rem;
+    margin-top: 5rem; /* Margem no topo para não colar na navbar */
+    border-radius: 1rem; /* Bordas mais arredondadas */
+}

@@ -1,0 +1,88 @@
+/* to_do/static/to_do/css/style.css */
+
+/* 1. Definindo a paleta de cores final */
+:root {
+    --amarelo-nav: #fcfca8;
+    --amarelo-principal: #FDFD96;
+    --amarelo-hover: #F9F977;
+    --lilas-detalhe: #A475A4;      /* Lilás para detalhes e acentos */
+    --lilas-detalhe-hover: #C8A2C8;/* Lilás mais claro para hover em links */
+    --fundo-neutro: #f8f9fa;       /* Fundo neutro (cinza bem claro do Bootstrap) */
+    --texto-escuro: #5e5e5e;
+    --texto-claro: #ffffff;
+}
+
+/* 2. Aplicando as cores de fundo e texto padrão */
+body {
+    background-color: var(--fundo-neutro) !important;
+    color: var(--texto-escuro);
+}
+
+/* 3. Estilos dos componentes principais (continuam amarelos) */
+.navbar-amarelo {
+    background: linear-gradient(90deg, #FDFD96 0%, #FFFACD 100%);
+    box-shadow: 0 4px 15px rgba(164, 117, 164, 0.15);
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.btn-amarelo {
+    background-color: var(--amarelo-principal);
+    color: var(--texto-escuro);
+    border-color: var(--amarelo-principal);
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-amarelo:hover {
+    background-color: var(--amarelo-hover);
+    color: var(--texto-escuro);
+    border-color: var(--amarelo-hover);
+    /* Detalhe lilás no hover do botão principal! */
+    box-shadow: 0 0 8px rgba(164, 117, 164, 0.5);
+}
+
+.btn-outline-lilas {
+    color: var(--lilas-detalhe);
+    border-color: var(--lilas-detalhe);
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-outline-lilas:hover {
+    background-color: var(--lilas-detalhe);
+    color: var(--texto-claro);
+    border-color: var(--lilas-detalhe);
+}
+
+/* 4. APLICANDO O LILÁS NOS DETALHES */
+
+/* Links em geral terão a cor lilás */
+a {
+    color: var(--lilas-detalhe);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+a:hover {
+    color: var(--lilas-detalhe-hover);
+}
+
+/* Detalhe lilás em campos de formulário quando selecionados (foco) */
+/* Isso será útil na sua página de adicionar tarefas! */
+.form-control:focus {
+    border-color: var(--lilas-detalhe-hover);
+    box-shadow: 0 0 0 0.25rem rgba(200, 162, 200, 0.5); /* Usando o RGB do lilás */
+}
+
+/* Links específicos da Navbar precisam ser sobrescritos para não ficarem roxos */
+.navbar-txt {
+    color: var(--lilas-detalhe) !important; /* Garante que os links da navbar continuem escuros */
+}
+.navbar-amarelo .navbar-txt {
+    letter-spacing: 0.5px; /* Leve espaçamento entre as letras para elegância */
+}
+
+footer {
+    background-color: var(--texto-claro) !important;
+}

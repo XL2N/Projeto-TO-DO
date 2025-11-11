@@ -1,0 +1,62 @@
+{% extends "to_do/base.html" %}
+{% block title %}Cadastro{% endblock %}
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-5">
+        <div class="card shadow-lg border-0 mt-4 register-card">
+            <div class="card-body p-4 p-lg-5">
+            
+                <h2 class="text-center mb-4">Crie sua Conta</h2>
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">...</div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label for="{{ form.username.id_for_label }}" class="form-label">Usuário:</label>
+                        {{ form.username }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.password1.id_for_label }}" class="form-label">Senha:</label>
+                        {{ form.password1 }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.password2.id_for_label }}" class="form-label">Confirmar senha:</label>
+                        {{ form.password2 }}
+                    </div>
+
+                    <div class="mb-3 p-3 bg-light rounded-3" style="font-size: 0.85rem;">
+                        <h6 class="mb-2" style="font-size: 0.9rem; font-weight: 600;">Sua senha precisa:</h6>
+                        <ul class="list-unstyled text-muted mb-0">
+                            <li><i class="fa-solid fa-check text-success me-2"></i>Conter pelo menos 8 caracteres.</li>
+                            <li><i class="fa-solid fa-check text-success me-2"></i>Não ser comum ou fácil de adivinhar.</li>
+                            <li><i class="fa-solid fa-check text-success me-2"></i>Não ser inteiramente numérica.</li>
+                        </ul>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-amarelo btn-lg">Criar Conta</button>
+                    </div>
+                </form>
+
+                <div class="text-center mt-4">
+                    <small class="text-muted">Já tem uma conta? <a href="{% url 'login' %}">Faça login</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

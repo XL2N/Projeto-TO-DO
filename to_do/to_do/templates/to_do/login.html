@@ -1,0 +1,64 @@
+{% extends "to_do/base.html" %}
+{% block title %}Login{% endblock %}
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-5">
+        <div class="card shadow-lg border-0 mt-5 login-card">
+            <div class="card-body p-4 p-lg-5">
+            
+                <h2 class="text-center mb-4">Login</h2>
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label for="{{ form.username.id_for_label }}" class="form-label">Usuário:</label>
+                        {{ form.username }}
+                    </div>
+
+                    {% if form.username.errors %}
+                        <div class="text-danger small mb-2" style="margin-top: -10px;">
+                            {{ form.username.errors.as_text | cut:"* " }}
+                        </div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label for="{{ form.password1.id_for_label }}" class="form-label">Senha:</label>
+                        {{ form.password }}
+                    </div>
+                    
+                    {% if form.password.errors %}
+                        <div class="text-danger small mb-2" style="margin-top: -10px;">
+                            {{ form.password.errors.as_text | cut:"* " }}
+                        </div>
+                    {% endif %}
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-amarelo btn-lg">Entrar</button>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <small class="text-muted">Não tem uma conta? 
+                            <a href="{% url 'cadastro' %}">Cadastre-se</a> </small>
+                    </div>
+                </form>
+
+            </div> 
+        </div>
+    </div>
+</div>
+{% endblock %}

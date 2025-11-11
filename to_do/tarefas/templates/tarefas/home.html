@@ -1,0 +1,145 @@
+{% extends "to_do/base.html" %}
+{% block title %}Lista de Tarefas{% endblock %}
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+    
+
+    <div class="row justify-content-center">
+        <h1> Olá, {{ user.username }}!</h1>
+        <h2 > Bem-vindo à sua lista de tarefas!</h2>
+        <div class="col-lg-12">
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+
+                    <h4 >Adicionar Nova Tarefa</h4>
+                    <!-- Formulário para adicionar nova tarefa -->
+                    <form method="POST" action="{% url 'tarefas' %}" class="d-flex">
+                        {% csrf_token %} 
+                        {{ form.titulo }} 
+                        <button type="submit" class="btn btn-amarelo ms-2 px-4 fw-500 d-flex align-items-center" >
+                            <i class="fa-solid fa-plus me-2"></i>Salvar 
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <hr>
+
+            <h2 class="h4 mb-3"> Minhas lista de tarefas</h2>
+
+            <div class="list-group shadow-sm">
+                <!-- Lista de tarefas -->
+                {% for tarefa in tarefas %}
+                    <div class="list-group-item list-group-item-action {% if tarefa.concluida %}task-completed{% endif %}">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+
+                                <!-- Formulário para concluir tarefa -->
+                                <form method="POST" action="{% url 'tarefas' %}" class="me-3">
+                                    {% csrf_token %}
+
+                                    <input type="hidden" name="concluir_tarefa" value="{{ tarefa.id }}">
+
+                                    <input
+                                        type="checkbox"
+                                        name="esta_concluida"
+                                        value="sim"
+                                        onchange="this.form.submit()"
+                                        {% if tarefa.concluida %} checked {% endif %}
+                                        class="form-check-input"
+                                        style="width: 1.5em; height: 1.5em;"
+                                        aria-label="Concluir a tarefa: {{ tarefa.titulo }}">
+                                </form>
+
+                                <!-- Tarefa -->
+                                <span class="fw-500 task-title"> {{ tarefa.titulo }} </span>
+                            </div> 
+                                
+                            <div class="d-flex align-items-center">
+                                <small class="text-muted me-3 d-none d-sm-block"> 
+                                    <!--DATA-->
+                                    {{ tarefa.criada_em|date:"d/m/Y H:i" }}
+                                </small>
+
+                                <!-- Editar tarefa -->
+                                <button type="button" class="btn btn-outline-secondary btn-sm me-2 edit-btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editModal"
+                                    data-task-id="{{ tarefa.id }}"
+                                    data-task-title="{{ tarefa.titulo }}">
+                                    <i class="fa-solid fa-pencil"></i>
+                                    Editar
+                                </button>
+
+                                <!-- Excluir tarefa -->
+                                <form method="POST" action="{% url 'tarefas' %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" 
+                                        name="excluir_tarefa" 
+                                        value="{{ tarefa.id }}"
+                                        class="btn btn-outline-danger btn-sm">
+                                        <i class="fa-solid fa-trash"></i>
+                                        Excluir
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                
+                {% empty %}
+                    <div class="list-group-item">
+                        <h5 class="text-muted">Tudo limpo por aqui!</h5>
+                        <p class="text-muted mb-0">Adicione sua primeira tarefa no campo acima.</p>                    </div>
+                {% endfor %}
+
+                {% if tarefas %}
+                <div class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                    <span class="fw-bold text-muted">
+                        Pendentes: 
+                        <span class="badge bg-warning rounded-pill">{{ tarefas_pendentes }}</span>
+                    </span>
+                    <span class="fw-bold text-muted">
+                        Total: 
+                        <span class="badge bg-secondary rounded-pill">{{ total_tarefas }}</span>
+                    </span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar tarefa -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Editar Tarefa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="editForm" method="POST" action="">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="id_titulo" class="form-label">Título da Tarefa:</label>
+                            {{ form.titulo }}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" name="editar_tarefa" class="btn btn-amarelo">Salvar Alterações</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'js/modal.js' %}"></script>
+{% endblock %}
